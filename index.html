@@ -27,6 +27,13 @@
   html{ scroll-behavior:smooth; }
   body{
     background:var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 8%, rgba(212,160,23,0.05), transparent 32%),
+      radial-gradient(circle at 88% 18%, rgba(111,163,126,0.05), transparent 30%),
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: auto, auto, 48px 48px, 48px 48px;
+    background-attachment: fixed;
     color:var(--text);
     font-family:var(--sans);
     line-height:1.6;
@@ -37,7 +44,8 @@
 
   :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
 
-  .wrap{ max-width:1080px; margin:0 auto; padding:0 32px; }
+  .wrap{ max-width:1240px; margin:0 auto; padding:0 40px; }
+  @media (max-width:640px){ .wrap{ padding:0 20px; } }
 
   /* ---------- NAV ---------- */
   nav{
@@ -183,6 +191,7 @@
     <ul class="navlinks">
       <li><a href="#about">about</a></li>
       <li><a href="#skills">skills</a></li>
+      <li><a href="#experience">experience</a></li>
       <li><a href="#cases">projects</a></li>
       <li><a href="#certs">certs</a></li>
       <li><a href="#contact">contact</a></li>
@@ -196,7 +205,7 @@
       <div>
         <div class="eyebrow"><span class="dot"></span> STATUS: ACTIVELY MONITORING</div>
         <h1>Kavin Kumar<br><span class="accent">Threat detection,</span><br>from the ground up.</h1>
-        <p class="hero-sub">M.Sc Cybersecurity student building toward a SOC Analyst role — hands-on with SIEM, Active Directory security, and DevSecOps pipelines that catch problems before they ship.</p>
+        <p class="hero-sub">M.Sc Cybersecurity postgraduate with hands-on experience across SOC operations, cloud-native DevSecOps, and secure infrastructure. Comfortable on both sides of detection — simulating Active Directory attacks and building the monitoring stack that catches them.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#cases">View case files →</a>
           <a class="btn btn-ghost" href="mailto:03kavinkjr@gmail.com">Get in touch</a>
@@ -212,17 +221,17 @@
         </div>
         <div class="ticket">
           <div class="sev sev-ok">P3</div>
-          <div class="t-body"><div class="t-title">SOC detection lab deployed</div><div class="t-meta">Splunk · log analysis</div></div>
+          <div class="t-body"><div class="t-title">Golden/Silver Ticket sim</div><div class="t-meta">Rubeus · AD lab</div></div>
           <div class="status closed">RESOLVED</div>
         </div>
         <div class="ticket">
           <div class="sev sev-ok">P3</div>
-          <div class="t-body"><div class="t-title">CI/CD scanning baseline</div><div class="t-meta">Trivy · Checkov · Semgrep</div></div>
+          <div class="t-body"><div class="t-title">MITRE-aligned SPL rules</div><div class="t-meta">Splunk · 6 techniques</div></div>
           <div class="status closed">RESOLVED</div>
         </div>
         <div class="ticket">
           <div class="sev sev-crit">P1</div>
-          <div class="t-body"><div class="t-title">M.Sc Cybersecurity</div><div class="t-meta">coursework · in progress</div></div>
+          <div class="t-body"><div class="t-title">M.Sc Cybersecurity</div><div class="t-meta">Bharathiar Univ. · ongoing</div></div>
           <div class="status open">ONGOING</div>
         </div>
       </div>
@@ -235,15 +244,15 @@
     <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">Analyst Profile</span></div>
     <div class="about-grid">
       <div class="about-text">
-        <p>I'm a cybersecurity student focused on the practical side of defense — <strong>watching systems, catching anomalies, and hardening infrastructure</strong> before it's exploited rather than after.</p>
-        <p>My work spans two connected worlds: the <strong>SOC side</strong> — SIEM tooling, log analysis, Active Directory hardening — and the <strong>DevSecOps side</strong> — baking security scanning directly into Kubernetes and Terraform pipelines so vulnerabilities get caught in CI, not in production.</p>
-        <p>I learn by building labs I can break and fix. Every project below started as a question I wanted a real, working answer to.</p>
+        <p>I'm a cybersecurity postgraduate focused on the practical side of defense — <strong>watching systems, catching anomalies, and hardening infrastructure</strong> before it's exploited rather than after.</p>
+        <p>My work spans two connected worlds: the <strong>SOC side</strong> — building MITRE ATT&amp;CK-aligned detection rules on Splunk, operating Wazuh SIEM/XDR, and triaging alerts — and the <strong>DevSecOps side</strong> — baking automated security scanning directly into Kubernetes and Terraform pipelines on AWS so vulnerabilities get caught in CI, not in production.</p>
+        <p>I'm comfortable on both sides of detection: simulating real Active Directory attacks like Golden and Silver Ticket forgery with Rubeus, then building the monitoring stack that would catch them.</p>
       </div>
       <div class="field-list">
-        <div class="field-row"><span class="k">Role Target</span><span class="v">SOC Analyst</span></div>
-        <div class="field-row"><span class="k">Education</span><span class="v">M.Sc Cybersecurity</span></div>
-        <div class="field-row"><span class="k">Core Focus</span><span class="v">SIEM · Active Directory</span></div>
-        <div class="field-row"><span class="k">Secondary Focus</span><span class="v">DevSecOps · K8s · Terraform</span></div>
+        <div class="field-row"><span class="k">Role Target</span><span class="v">SOC Analyst / Security Engineering</span></div>
+        <div class="field-row"><span class="k">Education</span><span class="v">M.Sc Cybersecurity, Bharathiar Univ.</span></div>
+        <div class="field-row"><span class="k">Location</span><span class="v">Coimbatore, India</span></div>
+        <div class="field-row"><span class="k">Phone</span><span class="v">+91 91235 37593</span></div>
         <div class="field-row"><span class="k">GitHub</span><span class="v"><a href="https://github.com/03kavinkjr-del" target="_blank">03kavinkjr-del</a></span></div>
         <div class="field-row"><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/kavinkumark-cyber/" target="_blank">kavinkumark-cyber</a></span></div>
       </div>
@@ -256,58 +265,81 @@
     <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Skill Matrix</span></div>
     <div class="matrix">
       <div class="matrix-cell">
-        <div class="cat">Detection &amp; Monitoring</div>
+        <div class="cat">SIEM &amp; Detection</div>
         <ul>
-          <li>SIEM (Splunk)</li>
-          <li>Log analysis</li>
-          <li>Active Directory security</li>
+          <li>Splunk Enterprise (SPL, dashboards)</li>
+          <li>MITRE ATT&amp;CK-aligned rules</li>
+          <li>Wazuh SIEM/XDR</li>
+          <li>Kibana · Elasticsearch</li>
         </ul>
       </div>
       <div class="matrix-cell">
-        <div class="cat">Infrastructure</div>
+        <div class="cat">Cloud &amp; Infrastructure</div>
         <ul>
-          <li>Kubernetes</li>
+          <li>AWS (EC2, VPC, IAM, S3, EKS)</li>
+          <li>Kubernetes · Docker</li>
           <li>Terraform &amp; Helm</li>
-          <li>RBAC / network policy</li>
         </ul>
       </div>
       <div class="matrix-cell">
-        <div class="cat">AppSec / CI Scanning</div>
+        <div class="cat">DevSecOps / AppSec</div>
         <ul>
+          <li>GitHub Actions CI/CD</li>
           <li>Trivy · Checkov</li>
           <li>Semgrep · Gitleaks</li>
-          <li>CI/CD pipelines</li>
+          <li>RBAC · network policy · zero-trust</li>
         </ul>
       </div>
       <div class="matrix-cell">
-        <div class="cat">Observability</div>
+        <div class="cat">Adversary Simulation</div>
         <ul>
-          <li>Prometheus</li>
-          <li>Grafana</li>
+          <li>AD attacks: Golden/Silver Ticket</li>
+          <li>Kerberos forgery via Rubeus</li>
+          <li>Applied cryptography (AES)</li>
         </ul>
       </div>
       <div class="matrix-cell">
-        <div class="cat">Languages</div>
+        <div class="cat">SOC Operations</div>
         <ul>
-          <li>Python</li>
-          <li>HCL (Terraform)</li>
-          <li>Bash</li>
+          <li>Alert triage</li>
+          <li>Log analysis &amp; correlation</li>
+          <li>Vulnerability mgmt (Nessus)</li>
         </ul>
       </div>
       <div class="matrix-cell">
-        <div class="cat">Platform</div>
+        <div class="cat">Systems &amp; Identity</div>
         <ul>
-          <li>Linux</li>
-          <li>Git / GitHub Actions</li>
+          <li>Windows Server &amp; AD (DC, GPO)</li>
+          <li>Linux administration</li>
+          <li>Python · Prometheus/Grafana</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Experience</span></div>
+    <div class="case">
+      <div class="case-top">
+        <div>
+          <div class="case-id">2025 — 2026</div>
+          <div class="case-title">SOC &amp; Active Directory Lab Experience — ADPT Lab Program</div>
+        </div>
+      </div>
+      <p class="case-desc" style="max-width:none;">
+        Deployed Wazuh as an open-source SIEM/XDR platform, ingesting security logs into Elasticsearch and building Kibana dashboards for threat visualization, alert tracking, and endpoint monitoring; performed alert triage and log correlation on simulated security events.<br><br>
+        Ran Nessus vulnerability scans, prioritizing findings by risk severity and following the scan-to-remediation workflow.<br><br>
+        Provisioned a Windows Server domain controller and client machine with Group Policy Objects (GPOs), then simulated Kerberos ticket-forgery attacks (Golden Ticket, Silver Ticket) against the environment using Rubeus.
+      </p>
+    </div>
+  </div>
+</section>
+
 <section id="cases">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Case Files</span></div>
+    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Case Files</span></div>
 
     <div class="case">
       <div class="case-top">
@@ -329,7 +361,7 @@
         </div>
         <div class="case-tags"><span class="tag">Splunk</span><span class="tag">SIEM</span></div>
       </div>
-      <p class="case-desc">A hands-on SOC detection lab built with Splunk — ingesting and analyzing logs to practice real threat-detection workflows analysts use day to day.</p>
+      <p class="case-desc">Built a Splunk Enterprise SOC lab ingesting Sysmon and Windows Event Logs, writing custom SPL detection rules aligned to MITRE ATT&amp;CK for six attack techniques (encoded PowerShell, brute force, LOLBins, RDP anomalies), with dashboards for real-time threat visibility.</p>
       <a class="case-link" href="https://github.com/03kavinkjr-del/SOC-Detection-Lab-Splunk" target="_blank">View repository →</a>
     </div>
 
@@ -341,18 +373,31 @@
         </div>
         <div class="case-tags"><span class="tag">Python</span></div>
       </div>
-      <p class="case-desc">A working lab environment for exploring DevSecOps tooling and practices end to end.</p>
+      <p class="case-desc">Built a CI/CD pipeline with GitHub Actions that builds a Python Flask app into a non-root Docker container, runs it through Trivy for vulnerability scanning, and blocks the build on a failed security scan.</p>
       <a class="case-link" href="https://github.com/03kavinkjr-del/devsecops-lab" target="_blank">View repository →</a>
+    </div>
+
+    <div class="case">
+      <div class="case-top">
+        <div>
+          <div class="case-id">CASE-004</div>
+          <div class="case-title">Image Steganography using LSB Encoding</div>
+        </div>
+        <div class="case-tags"><span class="tag">Python</span><span class="tag">AES</span><span class="tag">GUI</span></div>
+      </div>
+      <p class="case-desc">Academic project: a Python tool with a GUI that encrypts payload data with AES before embedding it into image files via Least Significant Bit (LSB) encoding, with matching decryption/extraction logic to recover the original data.</p>
     </div>
   </div>
 </section>
 
 <section id="certs">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Certifications &amp; Education</span></div>
+    <div class="sec-head"><span class="sec-num">05</span><span class="sec-title">Certifications &amp; Education</span></div>
     <div class="cert-list">
-      <div class="cert"><strong>M.Sc Cybersecurity</strong>In progress</div>
-      <div class="cert"><strong>Add your certifications here</strong>e.g. CompTIA Security+, CEH, Splunk Core Certified User</div>
+      <div class="cert"><strong>Introduction to Vulnerability Management</strong>Security Blue Team · Passed 2026-01-25 · ID 183255084</div>
+      <div class="cert"><strong>Certified Cybersecurity Educator Professional (CCEP)</strong>Red Team Leaders · Issued Jan 8, 2026 · <a href="https://courses.redteamleaders.com/exam-completion/8c1c302c52bf2035" target="_blank" style="color:var(--amber);">Verify →</a></div>
+      <div class="cert"><strong>M.Sc Cybersecurity (Ongoing)</strong>Bharathiar University, Coimbatore · 2024–2026<br>Academic work: analyzed six real-world deepfake incidents (2019–2024) and designed the TRUTH mitigation framework for organizational awareness and response.</div>
+      <div class="cert"><strong>B.Sc Computer Science</strong>Sri Ramakrishna Mission College, Coimbatore · 2021–2024</div>
     </div>
   </div>
 </section>
