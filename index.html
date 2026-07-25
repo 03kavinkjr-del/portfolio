@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kavin Kumar — Cybersecurity &amp; SOC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg: #0F1419;
+    --bg-raised: #161B22;
+    --bg-raised-2: #1C232C;
+    --line: #2A323C;
+    --text: #E6E8EB;
+    --text-muted: #8B95A1;
+    --text-dim: #5C6773;
+    --amber: #D4A017;
+    --amber-dim: #6b5417;
+    --sage: #6FA37E;
+    --sage-dim: #2E4535;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Public Sans', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  ::selection{ background:var(--amber-dim); color:var(--text); }
+
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,20,25,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .logo{ font-family:var(--mono); font-weight:700; font-size:15px; letter-spacing:0.02em; }
+  .logo span{ color:var(--amber); }
+  .navlinks{ display:flex; gap:28px; list-style:none; font-family:var(--mono); font-size:13px; }
+  .navlinks a{ text-decoration:none; color:var(--text-muted); transition:color .15s; }
+  .navlinks a:hover{ color:var(--text); }
+  @media (max-width:640px){ .navlinks{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:80px 0 60px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start; }
+  @media (max-width:860px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--sage);
+    display:flex; align-items:center; gap:8px; margin-bottom:20px; letter-spacing:0.04em;
+  }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--sage); box-shadow:0 0 8px var(--sage); animation:pulse 2s infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+  h1{
+    font-family:var(--mono); font-weight:700; font-size:clamp(32px,5vw,52px);
+    line-height:1.1; letter-spacing:-0.01em; margin-bottom:20px;
+  }
+  h1 .accent{ color:var(--amber); }
+  .hero-sub{ color:var(--text-muted); font-size:17px; max-width:44ch; margin-bottom:32px; }
+
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:13px; padding:11px 20px; border-radius:4px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line); transition:all .15s;
+  }
+  .btn-primary{ background:var(--amber); color:#15130a; border-color:var(--amber); font-weight:600; }
+  .btn-primary:hover{ background:#e8b32a; }
+  .btn-ghost{ color:var(--text); }
+  .btn-ghost:hover{ border-color:var(--text-dim); background:var(--bg-raised); }
+
+  /* ---------- TICKET QUEUE (signature element) ---------- */
+  .queue{
+    background:var(--bg-raised); border:1px solid var(--line); border-radius:8px;
+    overflow:hidden; font-family:var(--mono); font-size:12.5px;
+  }
+  .queue-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 16px; border-bottom:1px solid var(--line); background:var(--bg-raised-2);
+    color:var(--text-dim);
+  }
+  .queue-head span:first-child{ color:var(--text-muted); font-weight:600; }
+  .ticket{
+    display:grid; grid-template-columns:64px 1fr 76px; gap:10px; align-items:center;
+    padding:13px 16px; border-bottom:1px solid var(--line);
+  }
+  .ticket:last-child{ border-bottom:none; }
+  .sev{
+    font-size:10px; font-weight:700; text-align:center; padding:3px 0; border-radius:3px; letter-spacing:0.03em;
+  }
+  .sev-crit{ background:var(--amber-dim); color:var(--amber); }
+  .sev-ok{ background:var(--sage-dim); color:var(--sage); }
+  .t-body .t-title{ color:var(--text); font-size:12.5px; }
+  .t-body .t-meta{ color:var(--text-dim); font-size:11px; margin-top:2px; }
+  .status{ font-size:11px; text-align:right; }
+  .status.open{ color:var(--amber); }
+  .status.closed{ color:var(--sage); }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  section{ padding:64px 0; border-bottom:1px solid var(--line); }
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:36px; }
+  .sec-num{ font-family:var(--mono); color:var(--text-dim); font-size:13px; }
+  .sec-title{ font-family:var(--mono); font-weight:700; font-size:22px; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+  @media (max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+  .about-text p{ color:var(--text-muted); margin-bottom:16px; font-size:15.5px; }
+  .about-text strong{ color:var(--text); font-weight:600; }
+
+  .field-list{ display:flex; flex-direction:column; gap:0; }
+  .field-row{ display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .field-row:last-child{ border-bottom:none; }
+  .field-row .k{ color:var(--text-dim); font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.04em; }
+  .field-row .v{ color:var(--text); text-align:right; }
+
+  /* ---------- SKILL MATRIX ---------- */
+  .matrix{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  @media (max-width:760px){ .matrix{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:500px){ .matrix{ grid-template-columns:1fr; } }
+  .matrix-cell{ background:var(--bg-raised); padding:22px; }
+  .matrix-cell .cat{ font-family:var(--mono); font-size:11px; color:var(--sage); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:12px; }
+  .matrix-cell ul{ list-style:none; }
+  .matrix-cell li{ font-size:14px; color:var(--text-muted); padding:4px 0; }
+  .matrix-cell li::before{ content:"› "; color:var(--text-dim); }
+
+  /* ---------- CASE FILES (projects) ---------- */
+  .case{
+    border:1px solid var(--line); border-radius:8px; background:var(--bg-raised);
+    padding:26px 28px; margin-bottom:18px;
+  }
+  .case:last-child{ margin-bottom:0; }
+  .case-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:10px; flex-wrap:wrap; }
+  .case-id{ font-family:var(--mono); font-size:11px; color:var(--text-dim); }
+  .case-title{ font-family:var(--mono); font-weight:700; font-size:17px; margin-top:4px; }
+  .case-title a{ text-decoration:none; }
+  .case-title a:hover{ color:var(--amber); }
+  .case-tags{ display:flex; gap:6px; flex-wrap:wrap; }
+  .tag{ font-family:var(--mono); font-size:10.5px; color:var(--text-muted); border:1px solid var(--line); padding:3px 8px; border-radius:3px; }
+  .case-desc{ color:var(--text-muted); font-size:14.5px; max-width:70ch; }
+  .case-link{ display:inline-block; margin-top:12px; font-family:var(--mono); font-size:12px; color:var(--amber); text-decoration:none; }
+  .case-link:hover{ text-decoration:underline; }
+
+  /* ---------- CERTS ---------- */
+  .cert-list{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .cert-list{ grid-template-columns:1fr; } }
+  .cert{ border:1px solid var(--line); border-radius:6px; padding:16px 18px; background:var(--bg-raised); font-size:14px; color:var(--text-muted); }
+  .cert strong{ color:var(--text); display:block; font-size:14.5px; margin-bottom:3px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact{ border-bottom:none; }
+  .contact-panel{
+    background:var(--bg-raised); border:1px solid var(--line); border-radius:8px;
+    padding:40px; text-align:center;
+  }
+  .contact-panel h2{ font-family:var(--mono); font-size:24px; margin-bottom:12px; }
+  .contact-panel p{ color:var(--text-muted); margin-bottom:24px; }
+  .contact-links{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+  footer{ text-align:center; padding:28px 0; font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">kavin<span>@</span>soc<span>:~$</span></div>
+    <ul class="navlinks">
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#cases">projects</a></li>
+      <li><a href="#certs">certs</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> STATUS: ACTIVELY MONITORING</div>
+        <h1>Kavin Kumar<br><span class="accent">Threat detection,</span><br>from the ground up.</h1>
+        <p class="hero-sub">M.Sc Cybersecurity student building toward a SOC Analyst role — hands-on with SIEM, Active Directory security, and DevSecOps pipelines that catch problems before they ship.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#cases">View case files →</a>
+          <a class="btn btn-ghost" href="mailto:03kavinkjr@gmail.com">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="queue">
+        <div class="queue-head"><span>incident_queue.log</span><span>live</span></div>
+        <div class="ticket">
+          <div class="sev sev-crit">P2</div>
+          <div class="t-body"><div class="t-title">Zero-trust K8s platform</div><div class="t-meta">Terraform · Helm · RBAC</div></div>
+          <div class="status open">IN PROGRESS</div>
+        </div>
+        <div class="ticket">
+          <div class="sev sev-ok">P3</div>
+          <div class="t-body"><div class="t-title">SOC detection lab deployed</div><div class="t-meta">Splunk · log analysis</div></div>
+          <div class="status closed">RESOLVED</div>
+        </div>
+        <div class="ticket">
+          <div class="sev sev-ok">P3</div>
+          <div class="t-body"><div class="t-title">CI/CD scanning baseline</div><div class="t-meta">Trivy · Checkov · Semgrep</div></div>
+          <div class="status closed">RESOLVED</div>
+        </div>
+        <div class="ticket">
+          <div class="sev sev-crit">P1</div>
+          <div class="t-body"><div class="t-title">M.Sc Cybersecurity</div><div class="t-meta">coursework · in progress</div></div>
+          <div class="status open">ONGOING</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">Analyst Profile</span></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a cybersecurity student focused on the practical side of defense — <strong>watching systems, catching anomalies, and hardening infrastructure</strong> before it's exploited rather than after.</p>
+        <p>My work spans two connected worlds: the <strong>SOC side</strong> — SIEM tooling, log analysis, Active Directory hardening — and the <strong>DevSecOps side</strong> — baking security scanning directly into Kubernetes and Terraform pipelines so vulnerabilities get caught in CI, not in production.</p>
+        <p>I learn by building labs I can break and fix. Every project below started as a question I wanted a real, working answer to.</p>
+      </div>
+      <div class="field-list">
+        <div class="field-row"><span class="k">Role Target</span><span class="v">SOC Analyst</span></div>
+        <div class="field-row"><span class="k">Education</span><span class="v">M.Sc Cybersecurity</span></div>
+        <div class="field-row"><span class="k">Core Focus</span><span class="v">SIEM · Active Directory</span></div>
+        <div class="field-row"><span class="k">Secondary Focus</span><span class="v">DevSecOps · K8s · Terraform</span></div>
+        <div class="field-row"><span class="k">GitHub</span><span class="v"><a href="https://github.com/03kavinkjr-del" target="_blank">03kavinkjr-del</a></span></div>
+        <div class="field-row"><span class="k">LinkedIn</span><span class="v"><a href="https://www.linkedin.com/in/kavinkumark-cyber/" target="_blank">kavinkumark-cyber</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Skill Matrix</span></div>
+    <div class="matrix">
+      <div class="matrix-cell">
+        <div class="cat">Detection &amp; Monitoring</div>
+        <ul>
+          <li>SIEM (Splunk)</li>
+          <li>Log analysis</li>
+          <li>Active Directory security</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="cat">Infrastructure</div>
+        <ul>
+          <li>Kubernetes</li>
+          <li>Terraform &amp; Helm</li>
+          <li>RBAC / network policy</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="cat">AppSec / CI Scanning</div>
+        <ul>
+          <li>Trivy · Checkov</li>
+          <li>Semgrep · Gitleaks</li>
+          <li>CI/CD pipelines</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="cat">Observability</div>
+        <ul>
+          <li>Prometheus</li>
+          <li>Grafana</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="cat">Languages</div>
+        <ul>
+          <li>Python</li>
+          <li>HCL (Terraform)</li>
+          <li>Bash</li>
+        </ul>
+      </div>
+      <div class="matrix-cell">
+        <div class="cat">Platform</div>
+        <ul>
+          <li>Linux</li>
+          <li>Git / GitHub Actions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Case Files</span></div>
+
+    <div class="case">
+      <div class="case-top">
+        <div>
+          <div class="case-id">CASE-001</div>
+          <div class="case-title"><a href="https://github.com/03kavinkjr-del/k8s-securebank-devsecops" target="_blank">k8s-securebank-devsecops</a></div>
+        </div>
+        <div class="case-tags"><span class="tag">Terraform</span><span class="tag">Kubernetes</span><span class="tag">Helm</span></div>
+      </div>
+      <p class="case-desc">Zero-trust DevSecOps platform on Kubernetes. Terraform + Helm deployment with Trivy, Checkov, Semgrep, and Gitleaks scanning built directly into CI/CD — plus RBAC, network policies, and Prometheus/Grafana monitoring.</p>
+      <a class="case-link" href="https://github.com/03kavinkjr-del/k8s-securebank-devsecops" target="_blank">View repository →</a>
+    </div>
+
+    <div class="case">
+      <div class="case-top">
+        <div>
+          <div class="case-id">CASE-002</div>
+          <div class="case-title"><a href="https://github.com/03kavinkjr-del/SOC-Detection-Lab-Splunk" target="_blank">SOC-Detection-Lab-Splunk</a></div>
+        </div>
+        <div class="case-tags"><span class="tag">Splunk</span><span class="tag">SIEM</span></div>
+      </div>
+      <p class="case-desc">A hands-on SOC detection lab built with Splunk — ingesting and analyzing logs to practice real threat-detection workflows analysts use day to day.</p>
+      <a class="case-link" href="https://github.com/03kavinkjr-del/SOC-Detection-Lab-Splunk" target="_blank">View repository →</a>
+    </div>
+
+    <div class="case">
+      <div class="case-top">
+        <div>
+          <div class="case-id">CASE-003</div>
+          <div class="case-title"><a href="https://github.com/03kavinkjr-del/devsecops-lab" target="_blank">devsecops-lab</a></div>
+        </div>
+        <div class="case-tags"><span class="tag">Python</span></div>
+      </div>
+      <p class="case-desc">A working lab environment for exploring DevSecOps tooling and practices end to end.</p>
+      <a class="case-link" href="https://github.com/03kavinkjr-del/devsecops-lab" target="_blank">View repository →</a>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Certifications &amp; Education</span></div>
+    <div class="cert-list">
+      <div class="cert"><strong>M.Sc Cybersecurity</strong>In progress</div>
+      <div class="cert"><strong>Add your certifications here</strong>e.g. CompTIA Security+, CEH, Splunk Core Certified User</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-panel">
+      <h2>Open to SOC &amp; DevSecOps opportunities</h2>
+      <p>If you're hiring or just want to talk security, reach out.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:03kavinkjr@gmail.com">03kavinkjr@gmail.com</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/kavinkumark-cyber/" target="_blank">LinkedIn →</a>
+        <a class="btn btn-ghost" href="https://github.com/03kavinkjr-del" target="_blank">GitHub →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>built by kavin · last updated 2026</footer>
+
+</body>
+</html>
